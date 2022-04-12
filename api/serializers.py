@@ -10,7 +10,7 @@ class ExpenseDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Expense
-        fields = ('author', 'amount', 'pub_date')
+        fields = ('author', 'description', 'pub_date', 'status')
 
 
 class ExpenseListSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class ExpenseListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Expense
-        fields = ('amount', 'pub_date')
+        fields = ('description', 'pub_date', 'status', 'pk')
 
 
 class ExpenseCreateSerializer(serializers.ModelSerializer):

@@ -13,7 +13,7 @@ class ExpenseViewSet(viewsets.ViewSet):
 
     @action(detail=False, permission_classes=[IsAuthorOrAdmin])
     def list(self, request):
-        queryset = Expense.objects.all()
+        queryset = Expense.objects.all().filter(author=request.user)
         serializer = ExpenseListSerializer(queryset, many=True)
         return Response(serializer.data)
 

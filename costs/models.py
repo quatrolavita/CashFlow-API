@@ -7,15 +7,20 @@ import datetime
 class Expense(models.Model):
     """ Class Expense. Contain information about user costs"""
 
-    amount = models.FloatField(default=0.00)
+    class Status(models.TextChoices):
+        DONE = 'DN',
+        IN_PROGRESS = 'IP',
+
+    description = models.TextField(default='Description')
     pub_date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=2, choices=Status.choices, default=Status.IN_PROGRESS)
 
     class Meta:
         ordering = ['pub_date']
 
     def __str__(self):
-        return f'{self.amount}, in {self.pub_date}'
+        return f'{self.description}, in {self.pub_date}'
 
     def was_published_recently(self):
         now = timezone.now()
